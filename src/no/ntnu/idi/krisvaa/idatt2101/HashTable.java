@@ -1,8 +1,5 @@
 package no.ntnu.idi.krisvaa.idatt2101;
 
-import com.sun.jdi.InvalidTypeException;
-
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class HashTable {
@@ -43,12 +40,15 @@ public class HashTable {
         return k;
     }
 
-    public int delete() {
-        return -1;
+    public int delete() throws NoSuchMethodException {
+        throw new NoSuchMethodException();
     }
 
-    public Object find(int k) {
-        return elements[k];
+    public String find(String s) {
+        int k = Hash.multhash(s, x);
+        LinkedList<String> l = elements[k];
+
+        return l.isEmpty() ? null : l.stream().filter(es -> es.equals(s) == true ).findFirst().get();
     }
 
     @Override

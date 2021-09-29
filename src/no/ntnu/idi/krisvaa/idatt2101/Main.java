@@ -1,11 +1,6 @@
 package no.ntnu.idi.krisvaa.idatt2101;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +15,7 @@ public class Main {
             h.insert(s.nextLine());
         }
 
-        System.out.println(h);
+        System.out.println(h.find("Magnus Rosvo"));
 
     }
 }
