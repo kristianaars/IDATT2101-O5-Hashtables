@@ -1,14 +1,26 @@
 package no.ntnu.idi.krisvaa.idatt2101;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
 
-    public static void main(String[] args) {
-        int m = 64;
+    public static void main(String[] args) throws Exception {
+        int m = 118;
+        HashTable h = new HashTable(m);
 
-        HashTable<String> h = new HashTable<>();
+        Scanner s = new Scanner(new URL("http://www.iie.ntnu.no/fag/_alg/hash/navn.txt").openStream());
 
-        int x = (int) (Math.log(m) / Math.log(2));
+        while (s.hasNext()) {
+            h.insert(s.nextLine());
+        }
 
-        System.out.println(Hash.multhash(654365478, x));
+        System.out.println(h);
+
     }
 }
