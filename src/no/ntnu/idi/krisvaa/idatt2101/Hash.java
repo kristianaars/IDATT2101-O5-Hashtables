@@ -17,15 +17,6 @@ public class Hash {
 
     /**
      * @param k Key to be hashed
-     * @param m NUmber of elements in hashtable
-     * @return
-     */
-    public static int divhash(int k, int m) {
-        return k % m;
-    }
-
-    /**
-     * @param k Key to be hashed
      * @param x Number of bits in tablesize (Where tablesize m = 2^x)
      * @return Hashed key-value
      */
@@ -33,6 +24,16 @@ public class Hash {
     public static int multhash(int k, int x) {
         int kA = (int) (k * A);
         return kA > 0 ? kA >> (31 - x) : (kA * -1) >> (31 - x);
+    }
+
+
+    /**
+     * @param k Key to be hashed
+     * @param m NUmber of elements in hashtable
+     * @return
+     */
+    public static int divhash(int k, int m) {
+        return k % m;
     }
 
 }

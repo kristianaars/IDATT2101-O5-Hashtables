@@ -1,14 +1,17 @@
 package no.ntnu.idi.krisvaa.idatt2101;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class HashTable {
 
     private LinkedList<String>[] elements;
     private int size;
-    private int x;
-    private int count = 0;
 
+    //Power of two to get to size (size = 2^x)
+    private int x;
+
+    private int count = 0;
     private int collisionCounter = 0;
 
     public HashTable(int size) {
@@ -17,15 +20,6 @@ public class HashTable {
         elements = new LinkedList[this.size];
 
         for(int i = 0; i < this.size; i++) { elements[i] = new LinkedList<>(); };
-    }
-
-    private int findNearestPowerOfTwo(int n) {
-        int power = 2;
-        while (power < n) {
-            power = power << 1;
-        }
-
-        return power;
     }
 
     public int insert(String s) {
@@ -40,15 +34,38 @@ public class HashTable {
         return k;
     }
 
-    public int delete() throws NoSuchMethodException {
-        throw new NoSuchMethodException();
+    private int findNearestPowerOfTwo(int n) {
+        int power = 2;
+        while (power < n) {
+            power = power << 1;
+        }
+
+        return power;
+    }
+
+    public float getLoadFactor() {
+        return (float) count / (float) size;
+    }
+
+    public int getCollisionCounter() {
+        return collisionCounter;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public String find(String s) {
         int k = Hash.multhash(s, x);
         LinkedList<String> l = elements[k];
 
-        return l.isEmpty() ? null : l.stream().filter(es -> es.equals(s) == true ).findFirst().get();
+        Iterator<String> it = l.iterator();
+        while (it.hasNext()) {
+            String sl = it.next();
+            if(sl.equals(s)) return sl;
+        }
+
+        return null;
     }
 
     @Override
