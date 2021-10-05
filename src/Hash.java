@@ -1,5 +1,3 @@
-package no.ntnu.idi.krisvaa.idatt2101;
-
 public class Hash {
 
     /**

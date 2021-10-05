@@ -1,7 +1,4 @@
-package no.ntnu.idi.krisvaa.idatt2101;
-
 import java.net.URL;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -40,6 +37,8 @@ public class Main {
         int size = linearProbe.getSize();
         int[] numberArray = generateRandomizedIntArray(size);
 
+        System.out.println("");
+        System.out.println("TableSize;TableCount;ProbeType;FillGrade;FillTime;CollisionGrade;CollisionCount;");
         performTest(numberArray, HashTypes.Linear, 0.5);
         performTest(numberArray, HashTypes.Linear, 0.8);
         performTest(numberArray, HashTypes.Linear, 0.9);
@@ -57,7 +56,6 @@ public class Main {
         performTest(numberArray, HashTypes.SquaredHash, 0.9);
         performTest(numberArray, HashTypes.SquaredHash, 0.99);
         performTest(numberArray, HashTypes.SquaredHash, 1);
-
 
     }
 
@@ -77,22 +75,30 @@ public class Main {
         long startTime = System.currentTimeMillis();
 
         for(int i = 0; i < endRange; i++) {
-            hashTable.insert(sourceArray[i]);
+            int res = hashTable.insert(sourceArray[i]);
+
+            if(res < 0) {
+                System.out.println("Table is full");
+            }
         }
 
         long timeElapsed = System.currentTimeMillis() - startTime;
-        System.out.println("" + hashType + ";"+fillGrade+";"+timeElapsed+"ms;");
+        double collisionGrade = hashTable.getCollisionCounter() / (double) hashTable.getCount();
+        System.out.println(hashTable.getSize() + ";" + hashTable.getCount() + ";" + hashType + ";" + fillGrade+";" + timeElapsed+"ms;" + collisionGrade + ";" + hashTable.getCollisionCounter() + ";");
     }
 
     public static int[] generateRandomizedIntArray(int size) {
         //Generate numbers
+        Random r = new Random();
+
+        int lastNum = 100;
         int[] array = new int[size];
         for(int i = 0; i<array.length; i++) {
-            array[i] = i + 1;
+            lastNum = lastNum + r.nextInt(100);
+            array[i] = lastNum;
         }
 
         //Shuffle numbers
-        Random r = new Random();
         for(int i = 0; i < array.length; i++) {
             int swapIndex = r.nextInt(array.length - 1);
             swap(swapIndex, i, array);

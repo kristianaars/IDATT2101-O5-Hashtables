@@ -1,5 +1,3 @@
-package no.ntnu.idi.krisvaa.idatt2101;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -14,6 +12,10 @@ public class HashTable {
     private int count = 0;
     private int collisionCounter = 0;
 
+    /**
+     * Hash tabel for task 1
+     * @param size Size of table, will be converted to closest 2^x
+     */
     public HashTable(int size) {
         this.size = findNearestPowerOfTwo(size);
         this.x = (int) (Math.log(this.size) / Math.log(2));
