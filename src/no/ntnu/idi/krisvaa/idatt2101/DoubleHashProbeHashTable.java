@@ -15,6 +15,7 @@ public class DoubleHashProbeHashTable extends OpenAddressHashTable {
             int j = probe(k_1, k_2, i);
             if(elements[j] == null) {
                 elements[j] = e;
+                count++;
                 return j;
             } else {
                 collisionCounter++;

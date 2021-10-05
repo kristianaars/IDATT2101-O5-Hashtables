@@ -13,6 +13,7 @@ public class SquaredProbeHashTable extends OpenAddressHashTable {
             int j = probe(k, i);
             if(elements[j] == null) {
                 elements[j] = e;
+                count++;
                 return j;
             } else {
                 collisionCounter++;
@@ -27,7 +28,8 @@ public class SquaredProbeHashTable extends OpenAddressHashTable {
     }
 
     private int probe(int k, int i) {
-        return (k + 7 * i + 9 * i*i) % size;
+        System.out.println(i);
+        return (k + (i + i*i)/2) % size;
     }
 
 }

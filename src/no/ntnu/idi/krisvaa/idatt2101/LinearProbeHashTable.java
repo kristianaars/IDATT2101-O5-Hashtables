@@ -7,12 +7,13 @@ public class LinearProbeHashTable extends OpenAddressHashTable {
     }
 
     public int insert(int e) {
-        int k = Hash.multhash(e, x);;
+        int k = Hash.multhash(e, x);
 
         for (int i = 0; i < size; i++) {
             int j = probe(k, i);
             if(elements[j] == null) {
                 elements[j] = e;
+                count++;
                 return j;
             } else {
                 collisionCounter++;
@@ -27,7 +28,7 @@ public class LinearProbeHashTable extends OpenAddressHashTable {
     }
 
     public int probe(int k, int i) {
-        return (k + 1) % size;
+        return (k + i) % size;
     }
 
 }
